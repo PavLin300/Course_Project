@@ -4,6 +4,8 @@ import java.awt.Component;
 
 import javax.swing.JLabel;
 
+import gui.MainGui;
+
 ;
 
 public class Creator extends AbstractWorker{
@@ -47,7 +49,7 @@ public class Creator extends AbstractWorker{
 				e.printStackTrace();
 			}
 			
-		} while (true);// TODO: change to isPlaying
+		} while (((MainGui)gui).isPlaying());// TODO: change to isPlaying
 		// Завершення роботи
 //		display("/other/peoplWait.png");
 		

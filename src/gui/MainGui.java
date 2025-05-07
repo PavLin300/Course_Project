@@ -48,7 +48,7 @@ public class MainGui {
 	}
 	
 	public boolean isPlaying() {
-		return true;
+		return true; // TODO: ADD MUSIC
 	}
 	
 	public boolean isCreatorWorking() {
