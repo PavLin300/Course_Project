@@ -34,6 +34,10 @@ public class Queue implements IfromTo{
 		// TODO Auto-generated method stub
 		que.addLast(tr);
 	}
+	
+	public Transaction removeFirst() {
+		return que.removeFirst(); 
+	}
 
 
 	public int getMaxSize() {

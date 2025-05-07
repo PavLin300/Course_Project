@@ -15,6 +15,7 @@ public abstract class AbstractWorker implements IfromTo{
 	public AbstractWorker(Object gui, JLabel label, Queue queue) {
 		this.gui = gui;
 		this.queue = queue;
+		this.label = label;
 	}
 	
 	protected void display(String pct) {

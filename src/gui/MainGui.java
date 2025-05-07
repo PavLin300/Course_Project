@@ -50,5 +50,9 @@ public class MainGui {
 	public boolean isPlaying() {
 		return true;
 	}
+	
+	public boolean isCreatorWorking() {
+		return true;
+	}
 
 }

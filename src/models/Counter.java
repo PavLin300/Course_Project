@@ -36,4 +36,10 @@ public class Counter implements IfromTo{
 		// TODO Auto-generated method stub
 		return textField;
 	}
+
+
+	public void increment() {
+		this.count++;
+	}
+	
 }
