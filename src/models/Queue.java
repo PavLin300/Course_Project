@@ -3,18 +3,21 @@ package models;
 import java.awt.Component;
 import java.util.ArrayDeque;
 
+import javax.swing.JSlider;
+
 import gui.MainGui;
 
 public class Queue implements IfromTo{
 	private Object gui;
 	public Counter refuseCounter; 
 	private ArrayDeque<Transaction> que = new ArrayDeque<Transaction>();
-
+	private JSlider slider;
 		
 
-	public Queue(Object gui, Counter refuseCounter) {
+	public Queue(Object gui, Counter refuseCounter, JSlider slider) {
 		this.gui = gui;
 		this.refuseCounter = refuseCounter;
+		this.slider = slider;
 	}
 	
 	
@@ -22,7 +25,8 @@ public class Queue implements IfromTo{
 		synchronized (this) {
 			if (getQueueSize() < getMaxSize()) {
 				addLast(tr);
-					this.notify();
+					this.notifyAll();
+					System.out.println("notify");
 				return;
 			}
 		}
@@ -55,14 +59,13 @@ public class Queue implements IfromTo{
 	@Override
 	public void onOut(Transaction tr) {
 		// TODO Auto-generated method stub
-		
 	}
 
 
 	@Override
 	public Component getComponent() {
 		// TODO Auto-generated method stub
-		return null;
+		return slider;
 	} 
 
 }

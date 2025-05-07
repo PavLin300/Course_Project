@@ -4,6 +4,7 @@ import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JSlider;
 
 public abstract class AbstractWorker implements IfromTo, Runnable{
 	protected Object gui;
@@ -11,11 +12,13 @@ public abstract class AbstractWorker implements IfromTo, Runnable{
 	protected Queue queue;
 	protected Transaction trs;
 	protected JLabel label;
+	protected JSlider minWorkTimeSlider; 
 	
-	public AbstractWorker(Object gui, JLabel label, Queue queue) {
+	public AbstractWorker(Object gui, JLabel label, Queue queue, JSlider minWorkTimeSlider) {
 		this.gui = gui;
 		this.queue = queue;
 		this.label = label;
+		this.minWorkTimeSlider = minWorkTimeSlider;
 	}
 	
 	protected void display(String pct) {

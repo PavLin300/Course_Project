@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JSlider;
 
 public class MainGui {
 
@@ -36,6 +37,10 @@ public class MainGui {
 	private Thread th1;
 	private Thread th2;
 	private Thread player;
+	private JSlider steptimeSlider;
+	private JSlider queueSlider;
+	private JSlider minCreateTimeSlider;
+	private JSlider minHandlTimeSlider;
 
 	/**
 	 * Launch the application.
@@ -65,7 +70,7 @@ public class MainGui {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 576, 456);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -76,34 +81,50 @@ public class MainGui {
 				doRun();
 			}
 		});
-		btnStartPlayer.setBounds(91, 188, 230, 46);
+		btnStartPlayer.setBounds(174, 333, 230, 46);
 		frame.getContentPane().add(btnStartPlayer);
 		
 		textFieldCounter = new JTextField();
-		textFieldCounter.setBounds(115, 46, 86, 20);
+		textFieldCounter.setBounds(464, 36, 86, 20);
 		frame.getContentPane().add(textFieldCounter);
 		textFieldCounter.setColumns(10);
 		
 		textFieldRefuseCounter = new JTextField();
 		textFieldRefuseCounter.setColumns(10);
-		textFieldRefuseCounter.setBounds(235, 146, 86, 20);
+		textFieldRefuseCounter.setBounds(474, 71, 86, 20);
 		frame.getContentPane().add(textFieldRefuseCounter);
 		
-		lblCreator1 = new JLabel("New label");
-		lblCreator1.setBounds(79, 102, 46, 14);
+		lblCreator1 = new JLabel("creator 1");
+		lblCreator1.setBounds(35, 74, 71, 52);
 		frame.getContentPane().add(lblCreator1);
 		
-		lblCreator2 = new JLabel("New label");
-		lblCreator2.setBounds(282, 82, 46, 14);
+		lblCreator2 = new JLabel("creator 2");
+		lblCreator2.setBounds(39, 220, 59, 64);
 		frame.getContentPane().add(lblCreator2);
 		
-		lblHandler1 = new JLabel("New label");
-		lblHandler1.setBounds(67, 137, 46, 14);
+		lblHandler1 = new JLabel("handler 1");
+		lblHandler1.setBounds(140, 93, 61, 69);
 		frame.getContentPane().add(lblHandler1);
 		
-		lblHandler2 = new JLabel("New label");
-		lblHandler2.setBounds(141, 137, 46, 14);
+		lblHandler2 = new JLabel("handler 2");
+		lblHandler2.setBounds(140, 226, 86, 52);
 		frame.getContentPane().add(lblHandler2);
+		
+		steptimeSlider = new JSlider();
+		steptimeSlider.setBounds(234, 50, 200, 26);
+		frame.getContentPane().add(steptimeSlider);
+		
+		queueSlider = new JSlider();
+		queueSlider.setBounds(234, 11, 200, 26);
+		frame.getContentPane().add(queueSlider);
+		
+		minCreateTimeSlider = new JSlider();
+		minCreateTimeSlider.setBounds(234, 112, 200, 26);
+		frame.getContentPane().add(minCreateTimeSlider);
+		
+		minHandlTimeSlider = new JSlider();
+		minHandlTimeSlider.setBounds(234, 159, 200, 26);
+		frame.getContentPane().add(minHandlTimeSlider);
 	}
 
 	public Container getPane() {
@@ -124,16 +145,20 @@ public class MainGui {
 		return btnStartPlayer;
 	}
 	
+	public JSlider getStepTimeSlider() {
+		return steptimeSlider;
+	}
+	
 	
 	protected void doRun() {
 		btnStartPlayer.setEnabled(false);
 		Counter counter = new Counter(textFieldCounter);
 		Counter refuseCounter = new Counter(textFieldRefuseCounter);
-		models.Queue queue = new models.Queue(this, refuseCounter);
-		Creator creator1 = new Creator(this, lblCreator1, queue);
-		Creator creator2 = new Creator(this, lblCreator2, queue);
-		Handler handler1 = new Handler(this, lblHandler1, queue);
-		Handler handler2 = new Handler(this, lblHandler2, queue);
+		models.Queue queue = new models.Queue(this, refuseCounter, queueSlider);
+		Creator creator1 = new Creator(this, lblCreator1, queue, minCreateTimeSlider);
+		Creator creator2 = new Creator(this, lblCreator2, queue, minCreateTimeSlider);
+		Handler handler1 = new Handler(this, lblHandler1, queue, minHandlTimeSlider, counter);
+		Handler handler2 = new Handler(this, lblHandler2, queue, minHandlTimeSlider, counter);
 		startTime = System.currentTimeMillis();
 		thPlay = playMusic();
 		(tc1 = new Thread(creator1)).start();
@@ -141,6 +166,8 @@ public class MainGui {
 		(th1 = new Thread(handler1)).start();
 		(th2 = new Thread(handler2)).start();
 	}
+
+
 	
 	private Thread playMusic() {
 		Thread t = new Thread() {
@@ -203,5 +230,11 @@ public class MainGui {
 	}
 	public JLabel getLblHandler2() {
 		return lblHandler2;
+	}
+	public JSlider getSteptimeSlider() {
+		return steptimeSlider;
+	}
+	public JSlider getQueueSlider() {
+		return queueSlider;
 	}
 }

@@ -3,6 +3,7 @@ package models;
 import java.awt.Component;
 
 import javax.swing.JLabel;
+import javax.swing.JSlider;
 
 import gui.MainGui;
 
@@ -11,51 +12,46 @@ import gui.MainGui;
 public class Creator extends AbstractWorker{
 
 	private String[] pictures = {
-		    "",
-		    "",
-		    ""
+	    "/photo/man1.png",
+	    "/photo/man2.png",
+	    "/photo/man3.png",
 	};
-	public Creator(Object gui, JLabel label, Queue queue) {
-		super(gui, label, queue);
+	public Creator(Object gui, JLabel label, Queue queue, JSlider minWorkTimeSlider) {
+		super(gui, label, queue, minWorkTimeSlider);
 		// TODO Auto-generated constructor stub
 	}
 	
 	public void run() {
 		do {
-			// Імітує процес створення транзакції
-			//showWorking(pictures);
-			// Створює транзакцію
+			System.out.println("create");
+			showWorking(pictures);
 			trs = new Transaction(gui);
-			
-			// Цикл перевірки та, можливо, чекання місця у черзі
 			synchronized (queue) {
 				while (queue.getQueueSize() >= queue.getMaxSize()) {
+					
 					try {
-						display("/other/peoplWait1.png");
+//						display("/other/peoplWait1.png");
 						
 						queue.wait();
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 				}
-			}// кінець блоку synchronized (queue) і циклу чекання
-			
-			// Створює поток переміщення транзакції
+			}
 			Thread t = trs.moveFromTo(this, queue);
-			// Призупиняється на час переміщення транзакції
-//			display("/other/peopljoin1.png");
-			
+			queue.onIn(trs);
+//			display("/other/peopljoin1.png");	
 			try {
 				t.join();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}
-			
-		} while (((MainGui)gui).isPlaying());// TODO: change to isPlaying
-		// Завершення роботи
-//		display("/other/peoplWait.png");
+			}	
+		} while (((MainGui) gui).isPlaying());
 		
+//		display("/other/peoplWait.png");
 	}
+
+
 
 
 	@Override
@@ -75,7 +71,7 @@ public class Creator extends AbstractWorker{
 	@Override
 	public Component getComponent() {
 		// TODO Auto-generated method stub
-		return null;
+		return label;
 	}
 
 	

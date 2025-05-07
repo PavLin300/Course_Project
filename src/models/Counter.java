@@ -42,4 +42,8 @@ public class Counter implements IfromTo{
 		this.count++;
 	}
 	
+	public void setCount(int count) {
+		this.count = count;
+	}
+	
 }
