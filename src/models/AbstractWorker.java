@@ -5,7 +5,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public abstract class AbstractWorker implements IfromTo{
+public abstract class AbstractWorker implements IfromTo, Runnable{
 	protected Object gui;
 	
 	protected Queue queue;

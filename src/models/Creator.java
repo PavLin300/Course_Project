@@ -10,9 +10,11 @@ import gui.MainGui;
 
 public class Creator extends AbstractWorker{
 
-	private String[] pictures;
-
-
+	private String[] pictures = {
+		    "",
+		    "",
+		    ""
+	};
 	public Creator(Object gui, JLabel label, Queue queue) {
 		super(gui, label, queue);
 		// TODO Auto-generated constructor stub
@@ -21,7 +23,7 @@ public class Creator extends AbstractWorker{
 	public void run() {
 		do {
 			// Імітує процес створення транзакції
-			showWorking(pictures);
+			//showWorking(pictures);
 			// Створює транзакцію
 			trs = new Transaction(gui);
 			
@@ -41,7 +43,7 @@ public class Creator extends AbstractWorker{
 			// Створює поток переміщення транзакції
 			Thread t = trs.moveFromTo(this, queue);
 			// Призупиняється на час переміщення транзакції
-			display("/other/peopljoin1.png");
+//			display("/other/peopljoin1.png");
 			
 			try {
 				t.join();

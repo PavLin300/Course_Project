@@ -6,13 +6,13 @@ import javax.swing.JTextField;
 
 public class Counter implements IfromTo{
 	
-	private int count;
+	private int count = 0;
 	private JTextField textField;
 	
 	
-	public Counter(int count, JTextField textField) {
+	public Counter(JTextField textField) {
 		super();
-		this.count = count;
+
 		this.textField = textField;
 	}
 

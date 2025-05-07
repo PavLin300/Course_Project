@@ -37,6 +37,7 @@ public class Transaction {
 	}
 	
 	public Point pointFrom(IfromTo point) {
+		System.out.println(point);
 		Component comp = point.getComponent();
 	    Point location = comp.getLocation();
 	    // Координати середини правої кромки

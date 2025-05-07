@@ -51,7 +51,7 @@ public class Handler extends AbstractWorker {
 	        }
 
 	        // 5. Імітація обробки транзакції
-	        showWorking(pcts);
+//	        showWorking(pcts);
 
 	        // 6. Переміщення транзакції до лічильника
 	        trs.moveFromTo(this, counter);
