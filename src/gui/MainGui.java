@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Container;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -38,6 +39,16 @@ public class MainGui {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	public Container getPane() {
+		// TODO Auto-generated method stub
+		return frame.getContentPane();
+		
+	}
+	
+	public boolean isPlaying() {
+		return true;
 	}
 
 }
