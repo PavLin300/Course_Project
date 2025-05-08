@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JSlider;
+import javax.swing.SwingConstants;
 
 public class MainGui {
 
@@ -81,49 +82,51 @@ public class MainGui {
 				doRun();
 			}
 		});
-		btnStartPlayer.setBounds(174, 333, 230, 46);
+		btnStartPlayer.setBounds(164, 346, 230, 46);
 		frame.getContentPane().add(btnStartPlayer);
 		
 		textFieldCounter = new JTextField();
-		textFieldCounter.setBounds(464, 36, 86, 20);
+		textFieldCounter.setText("Counter");
+		textFieldCounter.setBounds(448, 98, 102, 28);
 		frame.getContentPane().add(textFieldCounter);
 		textFieldCounter.setColumns(10);
 		
 		textFieldRefuseCounter = new JTextField();
+		textFieldRefuseCounter.setText("RefuseCounter");
 		textFieldRefuseCounter.setColumns(10);
-		textFieldRefuseCounter.setBounds(474, 71, 86, 20);
+		textFieldRefuseCounter.setBounds(448, 264, 102, 31);
 		frame.getContentPane().add(textFieldRefuseCounter);
 		
 		lblCreator1 = new JLabel("creator 1");
-		lblCreator1.setBounds(35, 74, 71, 52);
+		lblCreator1.setBounds(29, 26, 111, 125);
 		frame.getContentPane().add(lblCreator1);
 		
 		lblCreator2 = new JLabel("creator 2");
-		lblCreator2.setBounds(39, 220, 59, 64);
+		lblCreator2.setBounds(29, 162, 88, 125);
 		frame.getContentPane().add(lblCreator2);
 		
 		lblHandler1 = new JLabel("handler 1");
-		lblHandler1.setBounds(140, 93, 61, 69);
+		lblHandler1.setBounds(292, 26, 102, 134);
 		frame.getContentPane().add(lblHandler1);
 		
 		lblHandler2 = new JLabel("handler 2");
-		lblHandler2.setBounds(140, 226, 86, 52);
+		lblHandler2.setBounds(308, 181, 102, 134);
 		frame.getContentPane().add(lblHandler2);
 		
 		steptimeSlider = new JSlider();
-		steptimeSlider.setBounds(234, 50, 200, 26);
+		steptimeSlider.setBounds(35, 289, 200, 26);
 		frame.getContentPane().add(steptimeSlider);
 		
 		queueSlider = new JSlider();
-		queueSlider.setBounds(234, 11, 200, 26);
+		queueSlider.setBounds(158, 160, 117, 20);
 		frame.getContentPane().add(queueSlider);
 		
 		minCreateTimeSlider = new JSlider();
-		minCreateTimeSlider.setBounds(234, 112, 200, 26);
+		minCreateTimeSlider.setBounds(236, 11, 200, 26);
 		frame.getContentPane().add(minCreateTimeSlider);
 		
 		minHandlTimeSlider = new JSlider();
-		minHandlTimeSlider.setBounds(234, 159, 200, 26);
+		minHandlTimeSlider.setBounds(26, 11, 200, 26);
 		frame.getContentPane().add(minHandlTimeSlider);
 	}
 

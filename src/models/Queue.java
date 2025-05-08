@@ -25,8 +25,7 @@ public class Queue implements IfromTo{
 		synchronized (this) {
 			if (getQueueSize() < getMaxSize()) {
 				addLast(tr);
-					this.notifyAll();
-					System.out.println("notify");
+					this.notify();
 				return;
 			}
 		}

@@ -24,7 +24,6 @@ public class Handler extends AbstractWorker {
 	
 	public void run() {
 		while (((MainGui) gui).isCreatorWorking() || queue.getQueueSize() > 0) {
-			System.out.println("handle");
 			synchronized (queue) {
 				while (queue.getQueueSize() <= 0) {
 //					display("/other/peoplWait.png");

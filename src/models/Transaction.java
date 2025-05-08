@@ -34,7 +34,6 @@ public class Transaction {
 	    // Координати середини лівої кромки
 	    int x = location.x;
 	    int y = location.y + comp.getHeight() / 2;
-
 	    return new Point(x, y);
 	}
 	
@@ -44,7 +43,6 @@ public class Transaction {
 	    // Координати середини правої кромки
 	    int x = location.x + comp.getWidth();
 	    int y = location.y + comp.getHeight() / 2;
-
 	    return new Point(x, y);
 	}
 	
@@ -78,8 +76,7 @@ public class Transaction {
 				
 				from.onOut(Transaction.this);
 				
-				for (int x = xFrom, y = yFrom, i = 0; i < n; x += dx, y += dy) {
-					System.out.println(x + y +  wT + hT);
+				for (int x = xFrom, y = yFrom, i = 0; i < n; x += dx, y += dy, i++) {
 					g.fillRect(x, y, wT, hT);
 					try {
 						

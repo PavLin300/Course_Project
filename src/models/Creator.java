@@ -23,7 +23,6 @@ public class Creator extends AbstractWorker{
 	
 	public void run() {
 		do {
-			System.out.println("create");
 			showWorking(pictures);
 			trs = new Transaction(gui);
 			synchronized (queue) {
@@ -39,7 +38,6 @@ public class Creator extends AbstractWorker{
 				}
 			}
 			Thread t = trs.moveFromTo(this, queue);
-			queue.onIn(trs);
 //			display("/other/peopljoin1.png");	
 			try {
 				t.join();
