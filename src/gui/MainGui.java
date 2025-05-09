@@ -20,6 +20,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
 
 public class MainGui {
 
@@ -71,7 +72,7 @@ public class MainGui {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 576, 456);
+		frame.setBounds(100, 100, 645, 487);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -82,52 +83,91 @@ public class MainGui {
 				doRun();
 			}
 		});
-		btnStartPlayer.setBounds(164, 346, 230, 46);
+		btnStartPlayer.setBounds(389, 391, 230, 46);
 		frame.getContentPane().add(btnStartPlayer);
 		
 		textFieldCounter = new JTextField();
 		textFieldCounter.setText("Counter");
-		textFieldCounter.setBounds(448, 98, 102, 28);
+		textFieldCounter.setBounds(505, 103, 102, 28);
 		frame.getContentPane().add(textFieldCounter);
 		textFieldCounter.setColumns(10);
 		
 		textFieldRefuseCounter = new JTextField();
 		textFieldRefuseCounter.setText("RefuseCounter");
 		textFieldRefuseCounter.setColumns(10);
-		textFieldRefuseCounter.setBounds(448, 264, 102, 31);
+		textFieldRefuseCounter.setBounds(505, 233, 102, 31);
 		frame.getContentPane().add(textFieldRefuseCounter);
 		
-		lblCreator1 = new JLabel("creator 1");
-		lblCreator1.setBounds(29, 26, 111, 125);
+		lblCreator1 = new JLabel("");
+		lblCreator1.setIcon(new ImageIcon(MainGui.class.getResource("/photo/man2.png")));
+		lblCreator1.setBounds(10, 71, 102, 125);
 		frame.getContentPane().add(lblCreator1);
 		
-		lblCreator2 = new JLabel("creator 2");
-		lblCreator2.setBounds(29, 162, 88, 125);
+		lblCreator2 = new JLabel("");
+		lblCreator2.setIcon(new ImageIcon(MainGui.class.getResource("/photo/man2.png")));
+		lblCreator2.setBounds(10, 242, 102, 125);
 		frame.getContentPane().add(lblCreator2);
 		
-		lblHandler1 = new JLabel("handler 1");
-		lblHandler1.setBounds(292, 26, 102, 134);
+		lblHandler1 = new JLabel("");
+		lblHandler1.setIcon(new ImageIcon(MainGui.class.getResource("/photo/man2.png")));
+		lblHandler1.setBounds(344, 71, 102, 134);
 		frame.getContentPane().add(lblHandler1);
 		
-		lblHandler2 = new JLabel("handler 2");
-		lblHandler2.setBounds(308, 181, 102, 134);
+		lblHandler2 = new JLabel("");
+		lblHandler2.setIcon(new ImageIcon(MainGui.class.getResource("/photo/man2.png")));
+		lblHandler2.setBounds(344, 233, 102, 134);
 		frame.getContentPane().add(lblHandler2);
 		
 		steptimeSlider = new JSlider();
-		steptimeSlider.setBounds(35, 289, 200, 26);
+		steptimeSlider.setMinorTickSpacing(10);
+		steptimeSlider.setMajorTickSpacing(20);
+		steptimeSlider.setPaintTicks(true);
+		steptimeSlider.setPaintLabels(true);
+		steptimeSlider.setMinimum(20);
+		steptimeSlider.setBounds(20, 400, 200, 37);
 		frame.getContentPane().add(steptimeSlider);
 		
 		queueSlider = new JSlider();
-		queueSlider.setBounds(158, 160, 117, 20);
+		queueSlider.setValue(0);
+		queueSlider.setMaximum(10);
+		queueSlider.setMajorTickSpacing(2);
+		queueSlider.setPaintLabels(true);
+		queueSlider.setPaintTicks(true);
+		queueSlider.setOrientation(SwingConstants.VERTICAL);
+		queueSlider.setBounds(158, 129, 117, 119);
 		frame.getContentPane().add(queueSlider);
 		
 		minCreateTimeSlider = new JSlider();
-		minCreateTimeSlider.setBounds(236, 11, 200, 26);
+		minCreateTimeSlider.setMajorTickSpacing(250);
+		minCreateTimeSlider.setMinorTickSpacing(25);
+		minCreateTimeSlider.setPaintTicks(true);
+		minCreateTimeSlider.setPaintLabels(true);
+		minCreateTimeSlider.setMinimum(250);
+		minCreateTimeSlider.setMaximum(1000);
+		minCreateTimeSlider.setBounds(10, 26, 200, 46);
 		frame.getContentPane().add(minCreateTimeSlider);
 		
 		minHandlTimeSlider = new JSlider();
-		minHandlTimeSlider.setBounds(26, 11, 200, 26);
+		minHandlTimeSlider.setPaintLabels(true);
+		minHandlTimeSlider.setPaintTicks(true);
+		minHandlTimeSlider.setMinimum(250);
+		minHandlTimeSlider.setMajorTickSpacing(250);
+		minHandlTimeSlider.setMinorTickSpacing(25);
+		minHandlTimeSlider.setMaximum(1000);
+		minHandlTimeSlider.setBounds(274, 26, 230, 46);
 		frame.getContentPane().add(minHandlTimeSlider);
+		
+		JLabel lblNewLabel = new JLabel("Create time");
+		lblNewLabel.setBounds(71, 11, 117, 14);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JLabel lblHandleTime = new JLabel("Handle time");
+		lblHandleTime.setBounds(374, 11, 117, 14);
+		frame.getContentPane().add(lblHandleTime);
+		
+		JLabel lblNewLabel_1 = new JLabel("Speed");
+		lblNewLabel_1.setBounds(84, 375, 36, 14);
+		frame.getContentPane().add(lblNewLabel_1);
 	}
 
 	public Container getPane() {

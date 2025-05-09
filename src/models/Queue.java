@@ -25,10 +25,12 @@ public class Queue implements IfromTo{
 		synchronized (this) {
 			if (getQueueSize() < getMaxSize()) {
 				addLast(tr);
-					this.notify();
+				this.slider.setValue(getQueueSize());
+				this.notify();
 				return;
 			}
 		}
+		
 		tr.moveFromTo(this, refuseCounter);
 }
 

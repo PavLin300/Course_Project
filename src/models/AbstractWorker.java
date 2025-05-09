@@ -32,7 +32,7 @@ public abstract class AbstractWorker implements IfromTo, Runnable{
 			for (String pic : pictures) {
 				display(pic);
 				try {
-					Thread.sleep(500);
+					Thread.sleep(minWorkTimeSlider.getValue());
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

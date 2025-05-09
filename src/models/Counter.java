@@ -12,7 +12,6 @@ public class Counter implements IfromTo{
 	
 	public Counter(JTextField textField) {
 		super();
-
 		this.textField = textField;
 	}
 
@@ -27,7 +26,12 @@ public class Counter implements IfromTo{
 	@Override
 	public void onIn(Transaction tr) {
 		// TODO Auto-generated method stub
-		this.count++;
+		synchronized (this) {
+			this.count++;
+			setCount(count);
+		}
+		
+		
 	}
 
 
@@ -43,7 +47,7 @@ public class Counter implements IfromTo{
 	}
 	
 	public void setCount(int count) {
-		this.count = count;
+		this.textField.setText(Integer.toString(count));
 	}
 	
 }
