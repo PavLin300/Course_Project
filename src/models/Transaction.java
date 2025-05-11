@@ -88,6 +88,7 @@ public class Transaction {
 					}
 					
 					g.fillRect(x, y, wT, hT);
+					
 				}
 				
 				to.onIn(Transaction.this);

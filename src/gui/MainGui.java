@@ -51,7 +51,9 @@ public class MainGui {
 	private JSlider minHandlTimeSlider;
 	private Image backgroundImage;
 	
+	private boolean isPlaying = false;
 
+	private boolean isCreatorWorking = false;
 	/**
 	 * Launch the application.
 	 */
@@ -101,7 +103,7 @@ public class MainGui {
         contentPanel.setLayout(null);
 
 		
-		btnStartPlayer = new JButton("New button");
+		btnStartPlayer = new JButton("Start");
 		btnStartPlayer.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -201,6 +203,16 @@ public class MainGui {
 		JLabel lblNewLabel_1 = new JLabel("Speed");
 		lblNewLabel_1.setBounds(83, 465, 36, 14);
 		contentPanel.add(lblNewLabel_1);
+		
+		JButton btnStop = new JButton("Stop");
+		btnStop.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				doStopPlay();
+			}
+		});
+		btnStop.setBounds(320, 490, 230, 46);
+		contentPanel.add(btnStop);
 	}
 
 	public Container getPane() {
@@ -209,12 +221,19 @@ public class MainGui {
 		
 	}
 	
-	public boolean isPlaying() {
-		return true; // TODO: ADD MUSIC
+	public boolean getIsPlaying() {
+		return isPlaying; // TODO: ADD MUSIC
+	}
+	public void setIsPlaying(boolean val) {
+		this.isPlaying = val;
 	}
 	
-	public boolean isCreatorWorking() {
-		return true;
+	public boolean getIsCreatorWorking() {
+		return isCreatorWorking;
+	}
+	
+	public void setIsCreatorWorking(boolean val) {
+		this.isCreatorWorking = val;
 	}
 
 	public JButton getBtnStartPlayer() {
@@ -237,6 +256,8 @@ public class MainGui {
 		Handler handler2 = new Handler(this, lblHandler2, queue, minHandlTimeSlider, counter);
 		startTime = System.currentTimeMillis();
 		thPlay = playMusic();
+		setIsCreatorWorking(true);
+		setIsPlaying(true);
 		(tc1 = new Thread(creator1)).start();
 		(tc2 = new Thread(creator2)).start();
 		(th1 = new Thread(handler1)).start();
@@ -279,17 +300,12 @@ public class MainGui {
 	}
 
 	private void doStopPlay() {
-		player.stop();
+//		player.stop();
+		setIsPlaying(false);
+		setIsCreatorWorking(false);
+		onEndOfPlay();
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	public JTextField getTextFieldCounter() {

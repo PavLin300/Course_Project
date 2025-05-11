@@ -60,6 +60,15 @@ public class Queue implements IfromTo{
 	@Override
 	public void onOut(Transaction tr) {
 		// TODO Auto-generated method stub
+		synchronized (this) {
+			if (getQueueSize() != 0) {
+				removeFirst();
+				this.slider.setValue(getQueueSize());
+				this.notify();
+				return;
+			}
+		}
+
 	}
 
 

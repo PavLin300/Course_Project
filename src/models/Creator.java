@@ -30,7 +30,7 @@ public class Creator extends AbstractWorker{
 				while (queue.getQueueSize() >= queue.getMaxSize()) {
 					
 					try {
-//						display("/other/peoplWait1.png");
+						display("/photo/man2.png");
 						
 						queue.wait();
 					} catch (InterruptedException e) {
@@ -39,15 +39,15 @@ public class Creator extends AbstractWorker{
 				}
 			}
 			Thread t = trs.moveFromTo(this, queue);
-//			display("/other/peopljoin1.png");	
+			display("/photo/man2.png");
 			try {
 				t.join();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}	
-		} while (((MainGui) gui).isPlaying());
+		} while (((MainGui) gui).getIsPlaying());
 		
-//		display("/other/peoplWait.png");
+		display("/photo/man2.png");
 	}
 
 

@@ -23,10 +23,10 @@ public class Handler extends AbstractWorker {
 	}
 	
 	public void run() {
-		while (((MainGui) gui).isCreatorWorking() || queue.getQueueSize() > 0) {
+		while (((MainGui) gui).getIsCreatorWorking() || queue.getQueueSize() > 0) {
 			synchronized (queue) {
 				while (queue.getQueueSize() <= 0) {
-//					display("/other/peoplWait.png");
+					display("/photo/man2.png");
 					
 					try {
 						queue.wait();
@@ -40,7 +40,7 @@ public class Handler extends AbstractWorker {
 			}
 			
 			Thread t = trs.moveFromTo(queue, this);
-//			display("/other/peopljoin.png");
+			display("/photo/man2.png");
 
 			try {
 				
@@ -51,7 +51,7 @@ public class Handler extends AbstractWorker {
 			showWorking(pictures);		
 			trs.moveFromTo(this, counter);
 		}
-//		display("/other/peoplWait.png");
+		display("/photo/man2.png");
 }
 
 
