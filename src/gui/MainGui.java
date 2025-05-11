@@ -2,6 +2,8 @@ package gui;
 
 import java.awt.Container;
 import java.awt.EventQueue;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.net.URL;
 import java.util.Queue;
 
@@ -14,8 +16,12 @@ import models.Handler;
 
 import javax.swing.JButton;
 import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JSlider;
@@ -43,6 +49,8 @@ public class MainGui {
 	private JSlider queueSlider;
 	private JSlider minCreateTimeSlider;
 	private JSlider minHandlTimeSlider;
+	private Image backgroundImage;
+	
 
 	/**
 	 * Launch the application.
@@ -72,9 +80,26 @@ public class MainGui {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 645, 487);
+		frame.setBounds(100, 100, 900, 599);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		// Завантажуємо зображення фону
+        backgroundImage = new ImageIcon(getClass().getResource("/photo/background.jpg")).getImage(); // Вказати правильний шлях до вашого JPG
+        
+        // Панель, на якій малюється фон
+        JPanel contentPanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                // Масштабуємо зображення до розміру панелі
+                g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        contentPanel.setBounds(0, 0, 884, 560);
+        frame.getContentPane().add(contentPanel);
+        contentPanel.setLayout(null);
+
 		
 		btnStartPlayer = new JButton("New button");
 		btnStartPlayer.addMouseListener(new MouseAdapter() {
@@ -83,40 +108,40 @@ public class MainGui {
 				doRun();
 			}
 		});
-		btnStartPlayer.setBounds(389, 391, 230, 46);
-		frame.getContentPane().add(btnStartPlayer);
+		btnStartPlayer.setBounds(619, 490, 230, 46);
+		contentPanel.add(btnStartPlayer);
 		
 		textFieldCounter = new JTextField();
 		textFieldCounter.setText("Counter");
-		textFieldCounter.setBounds(505, 103, 102, 28);
-		frame.getContentPane().add(textFieldCounter);
+		textFieldCounter.setBounds(666, 138, 102, 28);
+		contentPanel.add(textFieldCounter);
 		textFieldCounter.setColumns(10);
 		
 		textFieldRefuseCounter = new JTextField();
 		textFieldRefuseCounter.setText("RefuseCounter");
 		textFieldRefuseCounter.setColumns(10);
-		textFieldRefuseCounter.setBounds(505, 233, 102, 31);
-		frame.getContentPane().add(textFieldRefuseCounter);
+		textFieldRefuseCounter.setBounds(720, 374, 102, 31);
+		contentPanel.add(textFieldRefuseCounter);
 		
 		lblCreator1 = new JLabel("");
 		lblCreator1.setIcon(new ImageIcon(MainGui.class.getResource("/photo/man2.png")));
-		lblCreator1.setBounds(10, 71, 102, 125);
-		frame.getContentPane().add(lblCreator1);
+		lblCreator1.setBounds(198, 296, 102, 125);
+		contentPanel.add(lblCreator1);
 		
 		lblCreator2 = new JLabel("");
 		lblCreator2.setIcon(new ImageIcon(MainGui.class.getResource("/photo/man2.png")));
-		lblCreator2.setBounds(10, 242, 102, 125);
-		frame.getContentPane().add(lblCreator2);
+		lblCreator2.setBounds(357, 358, 102, 125);
+		contentPanel.add(lblCreator2);
 		
 		lblHandler1 = new JLabel("");
 		lblHandler1.setIcon(new ImageIcon(MainGui.class.getResource("/photo/man2.png")));
-		lblHandler1.setBounds(344, 71, 102, 134);
-		frame.getContentPane().add(lblHandler1);
+		lblHandler1.setBounds(449, 213, 102, 134);
+		contentPanel.add(lblHandler1);
 		
 		lblHandler2 = new JLabel("");
 		lblHandler2.setIcon(new ImageIcon(MainGui.class.getResource("/photo/man2.png")));
-		lblHandler2.setBounds(344, 233, 102, 134);
-		frame.getContentPane().add(lblHandler2);
+		lblHandler2.setBounds(584, 248, 102, 134);
+		contentPanel.add(lblHandler2);
 		
 		steptimeSlider = new JSlider();
 		steptimeSlider.setMinorTickSpacing(10);
@@ -124,8 +149,10 @@ public class MainGui {
 		steptimeSlider.setPaintTicks(true);
 		steptimeSlider.setPaintLabels(true);
 		steptimeSlider.setMinimum(20);
-		steptimeSlider.setBounds(20, 400, 200, 37);
-		frame.getContentPane().add(steptimeSlider);
+		steptimeSlider.setBounds(22, 490, 200, 37);
+		steptimeSlider.setOpaque(false);
+		steptimeSlider.setBackground(new Color(0, 0, 0, 0));
+		contentPanel.add(steptimeSlider);
 		
 		queueSlider = new JSlider();
 		queueSlider.setValue(0);
@@ -134,8 +161,10 @@ public class MainGui {
 		queueSlider.setPaintLabels(true);
 		queueSlider.setPaintTicks(true);
 		queueSlider.setOrientation(SwingConstants.VERTICAL);
-		queueSlider.setBounds(158, 129, 117, 119);
-		frame.getContentPane().add(queueSlider);
+		queueSlider.setBounds(472, 360, 117, 119);
+		queueSlider.setOpaque(false);
+		queueSlider.setBackground(new Color(0, 0, 0, 0));
+		contentPanel.add(queueSlider);
 		
 		minCreateTimeSlider = new JSlider();
 		minCreateTimeSlider.setMajorTickSpacing(250);
@@ -145,7 +174,9 @@ public class MainGui {
 		minCreateTimeSlider.setMinimum(250);
 		minCreateTimeSlider.setMaximum(1000);
 		minCreateTimeSlider.setBounds(10, 26, 200, 46);
-		frame.getContentPane().add(minCreateTimeSlider);
+		minCreateTimeSlider.setOpaque(false);
+		minCreateTimeSlider.setBackground(new Color(0, 0, 0, 0));
+		contentPanel.add(minCreateTimeSlider);
 		
 		minHandlTimeSlider = new JSlider();
 		minHandlTimeSlider.setPaintLabels(true);
@@ -155,19 +186,21 @@ public class MainGui {
 		minHandlTimeSlider.setMinorTickSpacing(25);
 		minHandlTimeSlider.setMaximum(1000);
 		minHandlTimeSlider.setBounds(274, 26, 230, 46);
-		frame.getContentPane().add(minHandlTimeSlider);
+		minHandlTimeSlider.setOpaque(false);
+		minHandlTimeSlider.setBackground(new Color(0, 0, 0, 0));
+		contentPanel.add(minHandlTimeSlider);
 		
 		JLabel lblNewLabel = new JLabel("Create time");
 		lblNewLabel.setBounds(71, 11, 117, 14);
-		frame.getContentPane().add(lblNewLabel);
+		contentPanel.add(lblNewLabel);
 		
 		JLabel lblHandleTime = new JLabel("Handle time");
 		lblHandleTime.setBounds(374, 11, 117, 14);
-		frame.getContentPane().add(lblHandleTime);
+		contentPanel.add(lblHandleTime);
 		
 		JLabel lblNewLabel_1 = new JLabel("Speed");
-		lblNewLabel_1.setBounds(84, 375, 36, 14);
-		frame.getContentPane().add(lblNewLabel_1);
+		lblNewLabel_1.setBounds(83, 465, 36, 14);
+		contentPanel.add(lblNewLabel_1);
 	}
 
 	public Container getPane() {

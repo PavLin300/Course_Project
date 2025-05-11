@@ -13,7 +13,7 @@ public class Creator extends AbstractWorker{
 
 	private String[] pictures = {
 	    "/photo/man1.png",
-	    "/photo/man2.png",
+	    "/photo/man2.1.png",
 	    "/photo/man3.png",
 	};
 	public Creator(Object gui, JLabel label, Queue queue, JSlider minWorkTimeSlider) {

@@ -12,7 +12,7 @@ public class Handler extends AbstractWorker {
 	private Counter counter;
 	private String[] pictures = {
 	    "/photo/man1.png",
-	    "/photo/man2.png",
+	    "/photo/man2.1.png",
 	    "/photo/man3.png",
 	};
 	
