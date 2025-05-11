@@ -50,8 +50,9 @@ public class Transaction {
 		Thread t = new Thread() {
 			public void run() {
 				int hT = 15, wT=15 ;
-				int xFrom = pointFrom(from).x;
-				int xTo = pointTo(to).x;
+				int xOffset = 20;
+				int xFrom = pointFrom(from).x + xOffset;
+				int xTo = pointTo(to).x + xOffset;
 				if (xFrom > xTo) {
 					
 					xFrom = pointTo(from).x;
@@ -59,8 +60,9 @@ public class Transaction {
 				}
 				int lenX = xTo - xFrom;
 				
-				int yFrom = pointFrom(from).y;
-				int yTo = pointTo(to).y;
+				int yOffset = -30;
+				int yFrom = pointFrom(from).y + yOffset;
+				int yTo = pointTo(to).y + yOffset;
 				int lenY = yTo - yFrom;
 				
 				int len = (int) (Math.round(Math

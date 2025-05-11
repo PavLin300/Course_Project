@@ -28,7 +28,7 @@ public abstract class AbstractWorker implements IfromTo, Runnable{
 	}
 	
 	protected void showWorking(String[] pictures) {
-		new Thread(() -> {
+		Thread t = new Thread(() -> {
 			for (String pic : pictures) {
 				display(pic);
 				try {
@@ -37,7 +37,13 @@ public abstract class AbstractWorker implements IfromTo, Runnable{
 					e.printStackTrace();
 				}
 			}
-		}).start();
+		});
+		t.start();
+		try {
+			t.join(); // чекаємо, поки завершиться
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

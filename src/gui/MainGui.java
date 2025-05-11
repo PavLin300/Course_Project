@@ -113,14 +113,14 @@ public class MainGui {
 		
 		textFieldCounter = new JTextField();
 		textFieldCounter.setText("Counter");
-		textFieldCounter.setBounds(666, 138, 102, 28);
+		textFieldCounter.setBounds(635, 129, 102, 28);
 		contentPanel.add(textFieldCounter);
 		textFieldCounter.setColumns(10);
 		
 		textFieldRefuseCounter = new JTextField();
 		textFieldRefuseCounter.setText("RefuseCounter");
 		textFieldRefuseCounter.setColumns(10);
-		textFieldRefuseCounter.setBounds(720, 374, 102, 31);
+		textFieldRefuseCounter.setBounds(712, 433, 102, 31);
 		contentPanel.add(textFieldRefuseCounter);
 		
 		lblCreator1 = new JLabel("");
@@ -140,7 +140,7 @@ public class MainGui {
 		
 		lblHandler2 = new JLabel("");
 		lblHandler2.setIcon(new ImageIcon(MainGui.class.getResource("/photo/man2.png")));
-		lblHandler2.setBounds(584, 248, 102, 134);
+		lblHandler2.setBounds(635, 259, 102, 134);
 		contentPanel.add(lblHandler2);
 		
 		steptimeSlider = new JSlider();
