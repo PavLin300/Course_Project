@@ -50,6 +50,7 @@ public class MainGui {
 	private JSlider minCreateTimeSlider;
 	private JSlider minHandlTimeSlider;
 	private Image backgroundImage;
+	private JPanel contentPanel;
 	
 	private boolean isPlaying = false;
 
@@ -90,7 +91,7 @@ public class MainGui {
         backgroundImage = new ImageIcon(getClass().getResource("/photo/background.jpg")).getImage(); // Вказати правильний шлях до вашого JPG
         
         // Панель, на якій малюється фон
-        JPanel contentPanel = new JPanel() {
+        contentPanel = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -213,13 +214,18 @@ public class MainGui {
 		});
 		btnStop.setBounds(320, 490, 230, 46);
 		contentPanel.add(btnStop);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon(MainGui.class.getResource("/photo/plane1.png")));
+		lblNewLabel_2.setBounds(514, 34, 447, 266);
+		contentPanel.add(lblNewLabel_2);
 	}
 
-	public Container getPane() {
-		// TODO Auto-generated method stub
-		return frame.getContentPane();
-		
-	}
+//	public Container getPane() {
+//		// TODO Auto-generated method stub
+//		return frame.getContentPane();
+//		
+//	}
 	
 	public boolean getIsPlaying() {
 		return isPlaying; // TODO: ADD MUSIC
@@ -249,7 +255,7 @@ public class MainGui {
 		btnStartPlayer.setEnabled(false);
 		Counter counter = new Counter(textFieldCounter);
 		Counter refuseCounter = new Counter(textFieldRefuseCounter);
-		models.Queue queue = new models.Queue(this, refuseCounter, queueSlider);
+		models.Queue queue = new models.Queue(this, counter,  refuseCounter, queueSlider);
 		Creator creator1 = new Creator(this, lblCreator1, queue, minCreateTimeSlider);
 		Creator creator2 = new Creator(this, lblCreator2, queue, minCreateTimeSlider);
 		Handler handler1 = new Handler(this, lblHandler1, queue, minHandlTimeSlider, counter);
@@ -291,6 +297,7 @@ public class MainGui {
 					th1.join();
 					th2.join();
 					btnStartPlayer.setEnabled(true);
+				   				   
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -299,7 +306,7 @@ public class MainGui {
 		}.start();
 	}
 
-	private void doStopPlay() {
+	public void doStopPlay() {
 //		player.stop();
 		setIsPlaying(false);
 		setIsCreatorWorking(false);
@@ -328,5 +335,15 @@ public class MainGui {
 	}
 	public JSlider getQueueSlider() {
 		return queueSlider;
+	}
+
+	public Graphics getGraphics() {
+		// TODO Auto-generated method stub
+		return contentPanel.getGraphics();
+	}
+
+	public Color getBackground() {
+		// TODO Auto-generated method stub
+		return contentPanel.getBackground();
 	}
 }

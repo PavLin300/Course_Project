@@ -4,25 +4,34 @@ import java.awt.Component;
 import java.util.ArrayDeque;
 
 import javax.swing.JSlider;
+import javax.swing.JTextField;
 
 import gui.MainGui;
 
 public class Queue implements IfromTo{
 	private Object gui;
 	public Counter refuseCounter; 
+	public Counter counter;
 	private ArrayDeque<Transaction> que = new ArrayDeque<Transaction>();
 	private JSlider slider;
+	private int maxSizeOfPlane = 10;
 		
 
-	public Queue(Object gui, Counter refuseCounter, JSlider slider) {
+	public Queue(Object gui, Counter counter,  Counter refuseCounter, JSlider slider) {
 		this.gui = gui;
 		this.refuseCounter = refuseCounter;
 		this.slider = slider;
+		this.counter = counter;
 	}
 	
 	
 	public void onIn(Transaction tr) {
 		synchronized (this) {
+			if(counter.getCounter() >= maxSizeOfPlane) {
+				tr.moveFromTo(this, refuseCounter);
+				((MainGui) gui).doStopPlay();
+				return;
+			}
 			if (getQueueSize() < getMaxSize()) {
 				addLast(tr);
 				this.slider.setValue(getQueueSize());
@@ -32,7 +41,7 @@ public class Queue implements IfromTo{
 		}
 		
 		tr.moveFromTo(this, refuseCounter);
-}
+	}
 
 
 	public void addLast(Transaction tr) {
@@ -41,6 +50,7 @@ public class Queue implements IfromTo{
 	}
 	
 	public Transaction removeFirst() {
+		this.slider.setValue(getQueueSize());
 		return que.removeFirst(); 
 	}
 
@@ -60,14 +70,7 @@ public class Queue implements IfromTo{
 	@Override
 	public void onOut(Transaction tr) {
 		// TODO Auto-generated method stub
-		synchronized (this) {
-			if (getQueueSize() != 0) {
-				removeFirst();
-				this.slider.setValue(getQueueSize());
-				this.notify();
-				return;
-			}
-		}
+
 
 	}
 

@@ -19,10 +19,10 @@ public class Transaction {
 	public Transaction(Object gui) {
 		this.gui = gui;
 		this.stepTimeSlider = ((MainGui) gui).getStepTimeSlider();
-		this.g = ((MainGui) gui).getPane().getGraphics();
+		this.g = ((MainGui) gui).getGraphics();
 		// Налаштування коольору графічного контексту
 		Color color = Color.RED; //Колір транзакції
-		Color back = ((MainGui) gui).getPane().getBackground();
+		Color back = ((MainGui) gui).getBackground();
 		int rgb = back.getRGB() ^ color.getRGB();
 		g.setXORMode(new Color(rgb));
 
@@ -41,7 +41,7 @@ public class Transaction {
 		Component comp = point.getComponent();
 	    Point location = comp.getLocation();
 	    // Координати середини правої кромки
-	    int x = location.x + comp.getWidth();
+	    int x = location.x + comp.getWidth() / 2;
 	    int y = location.y + comp.getHeight() / 2;
 	    return new Point(x, y);
 	}

@@ -40,6 +40,14 @@ public class Counter implements IfromTo{
 		// TODO Auto-generated method stub
 		return textField;
 	}
+	
+	public int getCounter() {
+	
+		System.out.println(this.count);
+		return this.count;
+	
+		
+	}
 
 
 	public void increment() {
