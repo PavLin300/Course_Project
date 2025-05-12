@@ -50,7 +50,8 @@ public class MainGui {
 	private JSlider minCreateTimeSlider;
 	private JSlider minHandlTimeSlider;
 	private Image backgroundImage;
-	private JPanel contentPanel;
+	private JPanel contentPanel;	
+	private TransactionPanel transactionPanel;
 	
 	private boolean isPlaying = false;
 
@@ -102,6 +103,12 @@ public class MainGui {
         contentPanel.setBounds(0, 0, 884, 560);
         frame.getContentPane().add(contentPanel);
         contentPanel.setLayout(null);
+        
+        
+        transactionPanel = new TransactionPanel();
+        transactionPanel.setBounds(0, 0, 884, 560);
+        transactionPanel.setOpaque(false);
+        contentPanel.add(transactionPanel);
 
 		
 		btnStartPlayer = new JButton("Start");
@@ -116,14 +123,14 @@ public class MainGui {
 		
 		textFieldCounter = new JTextField();
 		textFieldCounter.setText("Counter");
-		textFieldCounter.setBounds(635, 129, 102, 28);
+		textFieldCounter.setBounds(635, 129, 53, 28);
 		contentPanel.add(textFieldCounter);
 		textFieldCounter.setColumns(10);
 		
 		textFieldRefuseCounter = new JTextField();
 		textFieldRefuseCounter.setText("RefuseCounter");
 		textFieldRefuseCounter.setColumns(10);
-		textFieldRefuseCounter.setBounds(712, 433, 102, 31);
+		textFieldRefuseCounter.setBounds(712, 433, 86, 31);
 		contentPanel.add(textFieldRefuseCounter);
 		
 		lblCreator1 = new JLabel("");
@@ -255,7 +262,7 @@ public class MainGui {
 		btnStartPlayer.setEnabled(false);
 		Counter counter = new Counter(textFieldCounter);
 		Counter refuseCounter = new Counter(textFieldRefuseCounter);
-		models.Queue queue = new models.Queue(this, counter,  refuseCounter, queueSlider);
+		models.Queue queue = new models.Queue(this, refuseCounter, queueSlider);
 		Creator creator1 = new Creator(this, lblCreator1, queue, minCreateTimeSlider);
 		Creator creator2 = new Creator(this, lblCreator2, queue, minCreateTimeSlider);
 		Handler handler1 = new Handler(this, lblHandler1, queue, minHandlTimeSlider, counter);
@@ -345,5 +352,9 @@ public class MainGui {
 	public Color getBackground() {
 		// TODO Auto-generated method stub
 		return contentPanel.getBackground();
+	}
+	
+	public TransactionPanel getTransactionPanel() {
+	    return transactionPanel;
 	}
 }

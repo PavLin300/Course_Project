@@ -11,29 +11,30 @@ import gui.MainGui;
 public class Queue implements IfromTo{
 	private Object gui;
 	public Counter refuseCounter; 
-	public Counter counter;
 	private ArrayDeque<Transaction> que = new ArrayDeque<Transaction>();
 	private JSlider slider;
-	private int maxSizeOfPlane = 10;
+	private int maxSizeOfPlane = 30;
+	private int currentSizeOfPlane = 0;
 		
 
-	public Queue(Object gui, Counter counter,  Counter refuseCounter, JSlider slider) {
+	public Queue(Object gui,  Counter refuseCounter, JSlider slider) {
 		this.gui = gui;
 		this.refuseCounter = refuseCounter;
 		this.slider = slider;
-		this.counter = counter;
 	}
 	
 	
 	public void onIn(Transaction tr) {
 		synchronized (this) {
-			if(counter.getCounter() >= maxSizeOfPlane) {
+//			System.out.println(getQueueSize());
+			if(currentSizeOfPlane >= maxSizeOfPlane) {
 				tr.moveFromTo(this, refuseCounter);
 				((MainGui) gui).doStopPlay();
 				return;
 			}
 			if (getQueueSize() < getMaxSize()) {
 				addLast(tr);
+				this.currentSizeOfPlane++;
 				this.slider.setValue(getQueueSize());
 				this.notify();
 				return;

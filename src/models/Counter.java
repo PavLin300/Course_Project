@@ -42,8 +42,6 @@ public class Counter implements IfromTo{
 	}
 	
 	public int getCounter() {
-	
-		System.out.println(this.count);
 		return this.count;
 	
 		

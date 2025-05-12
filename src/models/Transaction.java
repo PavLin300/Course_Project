@@ -4,27 +4,31 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
 
 import javax.swing.JSlider;
 
 import gui.MainGui;
+import gui.TransactionPanel;
 
 public class Transaction {
 	private Object gui;
 
-	private Graphics g;
+//	private Graphics g;
+	private TransactionPanel panel;
 	
 	private JSlider stepTimeSlider;
 
 	public Transaction(Object gui) {
 		this.gui = gui;
 		this.stepTimeSlider = ((MainGui) gui).getStepTimeSlider();
-		this.g = ((MainGui) gui).getGraphics();
+		this.panel = ((MainGui) gui).getTransactionPanel();
+//		this.g = ((MainGui) gui).getGraphics();
 		// Налаштування коольору графічного контексту
 		Color color = Color.RED; //Колір транзакції
 		Color back = ((MainGui) gui).getBackground();
 		int rgb = back.getRGB() ^ color.getRGB();
-		g.setXORMode(new Color(rgb));
+//		g.setXORMode(new Color(rgb));
 
 	}
 	
@@ -79,15 +83,16 @@ public class Transaction {
 				from.onOut(Transaction.this);
 				
 				for (int x = xFrom, y = yFrom, i = 0; i < n; x += dx, y += dy, i++) {
-					g.fillRect(x, y, wT, hT);
-					try {
-						
-						Thread.sleep(stepTimeSlider.getValue());
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
+					Rectangle r = new Rectangle(x, y, wT, hT);
+				    panel.addRect(r);
+				    try {
+				        Thread.sleep(stepTimeSlider.getValue());
+				    } catch (InterruptedException e) {
+				        e.printStackTrace();
+				    }
+				    panel.clearRects(); // очищаем после кадра
 					
-					g.fillRect(x, y, wT, hT);
+//					g.fillRect(x, y, wT, hT);
 					
 				}
 				
