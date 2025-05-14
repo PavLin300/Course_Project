@@ -14,7 +14,6 @@ import gui.TransactionPanel;
 public class Transaction {
 	private Object gui;
 
-//	private Graphics g;
 	private TransactionPanel panel;
 	
 	private JSlider stepTimeSlider;
@@ -23,12 +22,9 @@ public class Transaction {
 		this.gui = gui;
 		this.stepTimeSlider = ((MainGui) gui).getStepTimeSlider();
 		this.panel = ((MainGui) gui).getTransactionPanel();
-//		this.g = ((MainGui) gui).getGraphics();
-		// Налаштування коольору графічного контексту
 		Color color = Color.RED; //Колір транзакції
 		Color back = ((MainGui) gui).getBackground();
 		int rgb = back.getRGB() ^ color.getRGB();
-//		g.setXORMode(new Color(rgb));
 
 	}
 	
@@ -92,7 +88,6 @@ public class Transaction {
 				    }
 				    panel.clearRects(); // очищаем после кадра
 					
-//					g.fillRect(x, y, wT, hT);
 					
 				}
 				
