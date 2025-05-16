@@ -52,6 +52,8 @@ public class MainGui {
 	private Image backgroundImage;
 	private JPanel contentPanel;	
 	private TransactionPanel transactionPanel;
+	private JLabel lblPlane;
+	private boolean isPlaneAnimating = false;
 	
 	private boolean isPlaying = false;
 
@@ -216,16 +218,16 @@ public class MainGui {
 		btnStop.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				doStopPlay();
+				fullStopPlay();
 			}
 		});
 		btnStop.setBounds(320, 490, 230, 46);
 		contentPanel.add(btnStop);
 		
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setIcon(new ImageIcon(MainGui.class.getResource("/photo/plane1.png")));
-		lblNewLabel_2.setBounds(514, 34, 447, 266);
-		contentPanel.add(lblNewLabel_2);
+		lblPlane = new JLabel("");
+		lblPlane.setIcon(new ImageIcon(MainGui.class.getResource("/photo/plane1.png")));
+		lblPlane.setBounds(514, 34, 447, 266);
+		contentPanel.add(lblPlane);
 	}
 
 //	public Container getPane() {
@@ -275,6 +277,8 @@ public class MainGui {
 		(tc2 = new Thread(creator2)).start();
 		(th1 = new Thread(handler1)).start();
 		(th2 = new Thread(handler2)).start();
+		getTextFieldCounter().setText("0");
+		getTextFieldRefuseCounter().setText("0");
 	}
 
 
@@ -312,15 +316,63 @@ public class MainGui {
 			}
 		}.start();
 	}
-
-	public void doStopPlay() {
+	
+	public void fullStopPlay() {
 //		player.stop();
 		setIsPlaying(false);
 		setIsCreatorWorking(false);
 		onEndOfPlay();
 	}
 
-	
+	public void doStopPlay() {
+//		player.stop();
+		setIsPlaying(false);
+		setIsCreatorWorking(false);
+		animatePlane(() -> {
+	        getTextFieldCounter().setText("0");
+	    });
+		onEndOfPlay();
+	}
+
+	public void animatePlane(Runnable onReturn) {
+	    if (isPlaneAnimating) return; // захист від повтору
+	    isPlaneAnimating = true;
+
+	    new Thread(() -> {
+	        try {
+	            JLabel planeLabel = lblPlane;
+	            int startX = planeLabel.getX();
+	            int y = planeLabel.getY();
+	            int frameWidth = frame.getWidth();
+
+	            Thread.sleep(3000); // Пауза перед вильотом
+
+	            while (planeLabel.getX() < frameWidth) {
+	                int finalX = planeLabel.getX() + 10;
+	                javax.swing.SwingUtilities.invokeLater(() -> planeLabel.setLocation(finalX, y));
+	                Thread.sleep(30);
+	            }
+
+	            Thread.sleep(1500);
+
+	            while (planeLabel.getX() > startX) {
+	                int finalX = planeLabel.getX() - 10;
+	                javax.swing.SwingUtilities.invokeLater(() -> planeLabel.setLocation(finalX, y));
+	                Thread.sleep(30);
+	            }
+
+	            if (onReturn != null) {
+	                onReturn.run();
+	            }
+
+	        } catch (InterruptedException e) {
+	            e.printStackTrace();
+	        } finally {
+	            isPlaneAnimating = false;
+	            doRun();
+	        }
+	    }).start();
+	}
 	
 	public JTextField getTextFieldCounter() {
 		return textFieldCounter;

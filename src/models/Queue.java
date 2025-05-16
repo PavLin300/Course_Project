@@ -25,28 +25,26 @@ public class Queue implements IfromTo{
 	
 	
 	public void onIn(Transaction tr) {
-		synchronized (this) {
-//			System.out.println(getQueueSize());
-			if(currentSizeOfPlane >= maxSizeOfPlane) {
-				tr.moveFromTo(this, refuseCounter);
-				((MainGui) gui).doStopPlay();
-				return;
-			}
-			if (getQueueSize() < getMaxSize()) {
-				addLast(tr);
-				this.currentSizeOfPlane++;
-				this.slider.setValue(getQueueSize());
-				this.notify();
-				return;
-			}
-		}
-		
-		tr.moveFromTo(this, refuseCounter);
-	}
+        synchronized (this) {
+//            System.out.println(getQueueSize());
+            if(currentSizeOfPlane >= maxSizeOfPlane) {
+                tr.moveFromTo(this, refuseCounter);
+                ((MainGui) gui).doStopPlay();
+                return;
+            }
+            if (getQueueSize() < getMaxSize()) {
+                addLast(tr);
+                this.currentSizeOfPlane++;
+                this.slider.setValue(getQueueSize());
+                this.notify();
+                return;
+            }
+        }
 
+        tr.moveFromTo(this, refuseCounter);
+    }
 
 	public void addLast(Transaction tr) {
-		// TODO Auto-generated method stub
 		que.addLast(tr);
 	}
 	
