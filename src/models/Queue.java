@@ -26,7 +26,6 @@ public class Queue implements IfromTo{
 	
 	public void onIn(Transaction tr) {
         synchronized (this) {
-//            System.out.println(getQueueSize());
             if(currentSizeOfPlane >= maxSizeOfPlane) {
                 tr.moveFromTo(this, refuseCounter);
                 ((MainGui) gui).doStopPlay();

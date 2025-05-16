@@ -86,7 +86,7 @@ public class Transaction {
 				    } catch (InterruptedException e) {
 				        e.printStackTrace();
 				    }
-				    panel.clearRects(); // очищаем после кадра
+				    panel.clearRects(); 
 					
 					
 				}

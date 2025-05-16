@@ -24,8 +24,14 @@ import javax.swing.JPanel;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
+
+import javazoom.jl.player.Player;
+
 import javax.swing.ImageIcon;
 
 public class MainGui {
@@ -44,7 +50,7 @@ public class MainGui {
 	private Thread tc2;
 	private Thread th1;
 	private Thread th2;
-	private Thread player;
+	private Player player = null;
 	private JSlider steptimeSlider;
 	private JSlider queueSlider;
 	private JSlider minCreateTimeSlider;
@@ -230,12 +236,6 @@ public class MainGui {
 		contentPanel.add(lblPlane);
 	}
 
-//	public Container getPane() {
-//		// TODO Auto-generated method stub
-//		return frame.getContentPane();
-//		
-//	}
-	
 	public boolean getIsPlaying() {
 		return isPlaying; // TODO: ADD MUSIC
 	}
@@ -284,20 +284,29 @@ public class MainGui {
 
 	
 	private Thread playMusic() {
-		Thread t = new Thread() {
-			public void run() {
-	//			try {
-	//				URL u = getClass().getResource("/other/Osen.mp3");
-	//				player = new Player(new BufferedInputStream(u.openStream(),2048));
-	//				player.play();
-	//				onEndOfPlay();
-	//			} catch (Exception e) {
-	//				e.printStackTrace();
-	//			}
-			}
-		};
-		t.start();
-		return t;
+	    Thread t = new Thread() {
+	        public void run() {
+	        	if(player == null) {
+		            try {
+		                while (isPlaying) {
+		                	 InputStream is = getClass().getResourceAsStream("/other/music.mp3");
+		                     BufferedInputStream bis = new BufferedInputStream(is);
+		                     player = new Player(bis); 
+		                     
+		                     while (isPlaying) {
+		                         player.play();
+		                         if (!isPlaying) break;
+		                     }
+		                }
+		            } catch (Exception e) {
+		                e.printStackTrace();
+		            }
+	        	}
+
+	        }
+	    };
+	    t.start();
+	    return t;
 	}
 
 	
@@ -317,21 +326,26 @@ public class MainGui {
 		}.start();
 	}
 	
+	private void closePlayer() {
+	    if (player != null) {
+	         player.close();
+	    }
+	}
+	
 	public void fullStopPlay() {
-//		player.stop();
 		setIsPlaying(false);
 		setIsCreatorWorking(false);
 		onEndOfPlay();
+		closePlayer(); 
 	}
 
 	public void doStopPlay() {
-//		player.stop();
 		setIsPlaying(false);
 		setIsCreatorWorking(false);
 		animatePlane(() -> {
 	        getTextFieldCounter().setText("0");
 	    });
-		onEndOfPlay();
+		onEndOfPlay();	
 	}
 
 	public void animatePlane(Runnable onReturn) {
