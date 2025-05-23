@@ -329,6 +329,7 @@ public class MainGui {
 	private void closePlayer() {
 	    if (player != null) {
 	         player.close();
+	         player = null;
 	    }
 	}
 	
