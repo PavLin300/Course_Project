@@ -237,7 +237,7 @@ public class MainGui {
 	}
 
 	public boolean getIsPlaying() {
-		return isPlaying; // TODO: ADD MUSIC
+		return isPlaying;
 	}
 	public void setIsPlaying(boolean val) {
 		this.isPlaying = val;
