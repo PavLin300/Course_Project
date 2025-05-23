@@ -15,6 +15,7 @@ public class Queue implements IfromTo{
 	private JSlider slider;
 	private int maxSizeOfPlane = 30;
 	private int currentSizeOfPlane = 0;
+	private int maxSizeOfQueue = 10;
 		
 
 	public Queue(Object gui,  Counter refuseCounter, JSlider slider) {
@@ -55,7 +56,7 @@ public class Queue implements IfromTo{
 
 	public int getMaxSize() {
 		// TODO Auto-generated method stub
-		return 10;
+		return maxSizeOfQueue;
 	}
 
 
