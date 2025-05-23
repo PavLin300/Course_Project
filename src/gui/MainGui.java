@@ -359,7 +359,7 @@ public class MainGui {
 	            int y = planeLabel.getY();
 	            int frameWidth = frame.getWidth();
 
-	            Thread.sleep(3000); // Пауза перед вильотом
+	            Thread.sleep(9000); // Пауза перед вильотом
 
 	            while (planeLabel.getX() < frameWidth) {
 	                int finalX = planeLabel.getX() + 10;
